@@ -4,13 +4,15 @@
   "description": "A node server used to controll processes using a REST API",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "mocha"
   },
   "author": "Filippo Berto (bertof)",
   "license": "MIT",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.4.1"
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0"
   },
   "dependencies": {
     "express": "^4.15.3"

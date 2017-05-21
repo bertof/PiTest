@@ -1,5 +1,4 @@
-FROM dock0/arch:latest 
-ENTRYPOINT ["npm", "start"]
+FROM dock0/arch:latest
  
 ENV USERNAME=user 
 ENV OPEN_PORT=4646
@@ -9,10 +8,10 @@ EXPOSE ${OPEN_PORT}
 LABEL maintainer "bertof@protonmail.com" 
  
 # Install nodejs and npm 
-RUN pacman -Syu nodejs npm --noconfirm 
- 
-# Install mocha globally 
-RUN npm install -g mocha nodemon
+RUN pacman -Syu nodejs npm --noconfirm
+
+# Install mocha globally
+#RUN npm install -g mocha nodemon
  
 # Add user 
 RUN useradd -m -G storage,power,wheel,users ${USERNAME} && \ 
@@ -28,3 +27,5 @@ WORKDIR /home/${USERNAME}/PiTest
  
 # Install dependencies 
 RUN npm install
+
+ENTRYPOINT ["npm", "start"]
