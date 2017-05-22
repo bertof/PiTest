@@ -4,6 +4,6 @@
 
 module.exports = {
     get: function (req, res) {
-        res.send("HELLO WORLD");
+        res.send("<pre>PiTest server running: " + require("../package.json").version + "</pre>");
     }
 };
