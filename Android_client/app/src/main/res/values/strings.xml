@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PiTest remote</string>
+    <string name="connection_setup">Connection setup</string>
+    <string name="connection_setup_desc">Connection settings</string>
+    <string name="connection_setup_text_desc">This assistant will guide you through the process of connecting to a PiTest device.</string>
+    <string name="connection_setup_text_precautions">Please verify that the host is activated, it\'s connected to the network and correctly configured for the remote access.</string>
+    <string name="hostname_hint">Hostname</string>
+    <string name="port_hint">Port</string>
+    <string name="token_hint">Token</string>
+    <string name="show_token_hint">Show token</string>
+    <string name="connection_setup_connect_button">Connect</string>
 </resources>
