@@ -2,9 +2,9 @@
  * Created by bertof on 21/05/17.
  */
 
-let Command = require("../classes/command");
-let outputHandler = require("../classes/outputHandler");
-let authenticator = require("../classes/authenticator");
+let Command = require("../../classes/command");
+let outputHandler = require("../../classes/outputHandler");
+let authenticator = require("../../classes/authenticator");
 
 module.exports = {
     get: function (req, res) {

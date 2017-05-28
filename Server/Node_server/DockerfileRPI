@@ -1,8 +1,7 @@
 FROM cellofellow/rpi-arch
-ENTRYPOINT ["node", "index.js"]
 
 ENV USERNAME=user
-ENV OPEN_PORT=8888
+ENV OPEN_PORT=4646
 
 EXPOSE ${OPEN_PORT}
 
@@ -28,3 +27,5 @@ WORKDIR /home/${USERNAME}/PiTest
 
 # Install dependencies
 RUN npm install
+
+ENTRYPOINT ["npm", "start"]

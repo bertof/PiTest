@@ -11,7 +11,7 @@ LABEL maintainer "bertof@protonmail.com"
 RUN pacman -Syu nodejs npm --noconfirm
 
 # Install mocha globally
-#RUN npm install -g mocha nodemon
+RUN npm install -g mocha nodemon
  
 # Add user 
 RUN useradd -m -G storage,power,wheel,users ${USERNAME} && \ 
