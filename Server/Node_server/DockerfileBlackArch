@@ -1,0 +1,11 @@
+FROM heichblatt/blackarch:latest
+
+LABEL maintainer "berto.f@protonmail.com"
+
+# Base packages installation, necessary to control host devices
+RUN sudo pacman -Syu --noconfirm --needed usbutils pciutils
+
+# Applications wanted by the user
+RUN sudo pacman -S --noconfirm --needed nmap aircrack-ng metasploit
+
+ENTRYPOINT ["bash"]
