@@ -1,0 +1,319 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{style}[2016/01/10 Custom Package]
+
+
+%-------------------INIZIO pacchetti utilizzati -----------------------------------------
+\RequirePackage[T1]{fontenc}	% codifica dei font in uscita
+\RequirePackage[utf8]{inputenc} % codifica dei font in uscita
+\RequirePackage[italian]{babel} % lingua del documento
+\RequirePackage{graphicx}		% pacchetto per la grafica
+\RequirePackage[a4paper,top=3cm,bottom=3cm,left=2.5cm,right=2.5cm] {geometry} %imposta pagina formato A4 e setta margini a piacimento
+
+\RequirePackage{url}			% per scrivere gli indirizzi Internet
+%\RequirePackage{breakurl}			% permette agli url di andare a capo
+\RequirePackage{enumerate} % liste lettere
+\RequirePackage{subfiles}
+\RequirePackage[bookmarks=true,hyperfootnotes=false,colorlinks=true]{hyperref}
+	\hypersetup{
+  	colorlinks,
+  	citecolor=gray,
+  	filecolor=brown,
+  	linkcolor=black,
+  	urlcolor=cyan
+	}
+\RequirePackage{fancyhdr}
+
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
+\RequirePackage{appendix}
+\RequirePackage[official]{eurosym} % per riprodurre il simbolo €
+\RequirePackage{caption}
+\RequirePackage[table]{xcolor}
+\RequirePackage{tabu}
+\RequirePackage{amsmath}	% per togliere numerazione equazioni (equation*)
+\RequirePackage{scrextend}	% per addmargin
+\RequirePackage{comment}
+
+
+% inizio per scrivere codice
+\RequirePackage{listings}
+\RequirePackage{xcolor}
+
+\RequirePackage{scalerel} 	%scalare immagini ad altezza testo
+\usepackage{grffile}		%supporto a file con spazi
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+%fine
+
+
+
+\captionsetup{tableposition=top,figureposition=bottom,font=small}
+\captionsetup{format=hang,labelfont={sf,bf}}
+\captionsetup[table]{position=bottom}
+\newcolumntype{C}{>{\centering\arraybackslash}X} % nell'ambiente tabularx è possibile usare C invece di X per centrare
+\renewcommand{\arraystretch}{1.27}  % Aumenta il padding delle tabelle
+
+\newcommand{\acapo}{\mbox{}\\} %Andare a capo dopo paragraph
+
+%-------------------FINE pacchetti utilizzati --------------------------------------------
+
+%-------------------INIZIO stile intestazioni e piè di pagina -----------------------------------------
+\newcommand{\intestazioni}[1]{
+\fancypagestyle{myfront}{
+		\hypersetup{
+				colorlinks=true,
+				linkcolor=black,
+		}
+		\pagenumbering{Roman}
+		\fancyhf{}
+		\lhead{Kern3lP4nic}
+			\lhead{\includegraphics[height=1cm,width=1cm,keepaspectratio]{Style/logo/logoPiTest} \DeclareGraphicsExtensions{.png} }
+
+		\rhead{\emph{\MakeUppercase{#1}}\vspace{-1mm} }
+
+		\rfoot{Pagina \thepage~di \pageref{LastFrontPage}}
+
+		\lfoot{\large{Project \emph{PiTest}}}
+
+		\renewcommand{\headrulewidth}{0.4pt}
+		\renewcommand{\footrulewidth}{0.4pt}
+	}
+
+	
+	\fancypagestyle{mymain}{
+		\hypersetup{
+				colorlinks=true,
+				linkcolor=black,
+				anchorcolor=black,
+				citecolor=black,
+				urlcolor=blue,
+		}
+		\pagenumbering{arabic}
+		\fancyhf{}
+			\lhead{\includegraphics[height=1cm,width=1cm,keepaspectratio]{Style/logo/logoPiTest} \DeclareGraphicsExtensions{.png}}
+
+		\rhead{\emph{\rightmark} }
+
+		\rfoot{ Pagina \thepage~di \pageref{LastPage} }
+
+		\lfoot{ \emph{\MakeUppercase{#1}}\vspace{-1mm} }
+
+		\renewcommand{\headrulewidth}{0.4pt}
+		\renewcommand{\footrulewidth}{0.4pt}
+	}
+
+}
+%-------------------FINE stile intestazioni e piè di pagina -----------------------------------------
+
+\setcounter{secnumdepth}{4} % fino ai paragraph
+\setcounter{tocdepth}{4}
+
+
+%-------------------INIZIO comandi personalizzati-----------------------------------------
+\newcommand{\nomeprogetto}{PiTest}
+\newcommand{\abujari}{\textit{Prof. Armir Bujari}}
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand{\mailstudenti}{\mail{filippo.berto.4@studenti.unipd.it}}
+\newcommand{\mailbertof}{\mail{berto.f@protonmail.com}}
+\newcommand{\mailinglist}{\mail{nome@mailing.list}}
+\newcommand{\pitest}{\textit{\nomeprogetto}}
+\newcommand{\sottotitolo}{\textit{Penetration Testing on a mobile platform}}
+
+%-------------------INIZIO comandi personalizzati ruoli----------------------------------------------------------
+\newcommand{\responsabilediprogetto}{\textit{Responsabile di progetto}}
+
+\newcommand{\amministratore}{\textit{Amministratore}}
+\newcommand{\amministratori}{\textit{Amministratori}}
+
+\newcommand{\analista}{\textit{Analista}}
+\newcommand{\analisti}{\textit{Analisti}}
+
+\newcommand{\progettista}{\textit{Progettista}}
+\newcommand{\progettisti}{\textit{Progettisti}}
+
+\newcommand{\programmatore}{\textit{Programmatore}}
+\newcommand{\programmatori}{\textit{Programmatori}}
+
+\newcommand{\verificatore}{\textit{Verificatore}}
+\newcommand{\verificatori}{\textit{Verificatori}}
+
+\newcommand{\segretario}{\textit{Segretario}}
+\newcommand{\segretari}{\textit{Segretari}}
+
+%-------------------FINE comandi personalizzati ruoli----------------------------------------------------------
+
+%----------------INIZIO comandi personalizzati documenti senza versione-------------------------------------------------
+\newcommand{\pianodiprogetto}{\textit{Piano di progetto}}
+\newcommand{\pianodiqualifica}{\textit{Piano di qualifica}}
+\newcommand{\normediprogetto}{\textit{Norme di progetto}}
+\newcommand{\studiodifattibilita}{\textit{Studio di fattibilità}}
+\newcommand{\analisideirequisiti}{\textit{Analisi dei requisiti}}
+\newcommand{\specificatecnica}{\textit{Specifica tecnica}}
+\newcommand{\definizionediprodotto}{\textit{Definizione di prodotto}}
+\newcommand{\manualeutente}{\textit{Manuale utente}}
+\newcommand{\manualesviluppatore}{\textit{Manuale sviluppatore}}
+\newcommand{\glossario}{\textit{Glossario}}
+%----------------FINE comandi personalizzati documenti senza versione-------------------------------------------------
+
+
+%da modificare ad ogni avanzamento di versione
+%----------------INIZIO comandi personalizzati documenti con versione-------------------------------------------------
+\newcommand{\pianodiprogettov}{\textit{Piano di progetto v4.0.0}}
+\newcommand{\pianodiqualificav}{\textit{Piano di qualifica v4.0.0}}
+\newcommand{\normediprogettov}{\textit{Norme di progetto v4.0.0}}
+\newcommand{\studiodifattibilitav}{\textit{Studio di fattibilità v2.0.0}}
+\newcommand{\analisideirequisitiv}{\textit{Analisi dei requisiti v4.0.0}}
+\newcommand{\definizionediprodottov}{\textit{Definizione di prodotto v3.0.0}}
+\newcommand{\manualeutentev}{\textit{Manuale utente v2.0.0}}
+\newcommand{\manualesviluppatorev}{\textit{Manuale sviluppatore v2.0.0}}
+\newcommand{\glossariov}{\textit{Glossario v4.0.0}}
+
+\newcommand{\pianodiprogettoRR}{\textit{Piano di progetto v1.0.0}}
+\newcommand{\pianodiqualificaRR}{\textit{Piano di qualifica v1.0.0}}
+\newcommand{\normediprogettoRR}{\textit{Norme di progetto v1.0.0}}
+\newcommand{\studiodifattibilitaRR}{\textit{Studio di fattibilità v1.0.0}}
+\newcommand{\analisideirequisitiRR}{\textit{Analisi dei requisiti v1.0.0}}
+\newcommand{\glossarioRR}{\textit{Glossario v1.0.0}}
+
+\newcommand{\pianodiprogettoRP}{\textit{Piano di progetto v2.0.0}}
+\newcommand{\pianodiqualificaRP}{\textit{Piano di qualifica v2.0.0}}
+\newcommand{\normediprogettoRP}{\textit{Norme di progetto v2.0.0}}
+\newcommand{\studiodifattibilitaRP}{\textit{Studio di fattibilità v2.0.0}}
+\newcommand{\analisideirequisitiRP}{\textit{Analisi dei requisiti v2.0.0}}
+\newcommand{\definizionediprodottoRP}{\textit{Definizione di prodotto v1.0.0}}
+\newcommand{\glossarioRP}{\textit{Glossario v2.0.0}}
+
+\newcommand{\pianodiprogettoRQ}{\textit{Piano di progetto v3.0.0}}
+\newcommand{\pianodiqualificaRQ}{\textit{Piano di qualifica v3.0.0}}
+\newcommand{\normediprogettoRQ}{\textit{Norme di progetto v3.0.0}}
+\newcommand{\studiodifattibilitaRQ}{\textit{Studio di fattibilità v3.0.0}}
+\newcommand{\analisideirequisitiRQ}{\textit{Analisi dei requisiti v3.0.0}}
+\newcommand{\definizionediprodottoRQ}{\textit{Definizione di prodotto v2.0.0}}
+\newcommand{\manualeutenteRQ}{\textit{Manuale utente v1.0.0}}
+\newcommand{\manualesviluppatoreRQ}{\textit{Manuale sviluppatore v1.0.0}}
+\newcommand{\glossarioRQ}{\textit{Glossario v3.0.0}}
+
+\newcommand{\pianodiprogettoRA}{\textit{Piano di progetto v4.0.0}}
+\newcommand{\pianodiqualificaRA}{\textit{Piano di qualifica v4.0.0}}
+\newcommand{\normediprogettoRA}{\textit{Norme di progetto v4.0.0}}
+\newcommand{\studiodifattibilitaRA}{\textit{Studio di fattibilità v4.0.0}}
+\newcommand{\analisideirequisitiRA}{\textit{Analisi dei requisiti v4.0.0}}
+\newcommand{\definizionediprodottoRA}{\textit{Definizione di prodotto v3.0.0}}
+\newcommand{\manualeutenteRA}{\textit{Manuale utente v2.0.0}}
+\newcommand{\manualesviluppatoreRA}{\textit{Manuale sviluppatore v2.0.0}}
+\newcommand{\glossarioRA}{\textit{Glossario v4.0.0}}
+%----------------FINE comandi personalizzati documenti con versione-------------------------------------------------
+%----------------INIZIO comandi personalizzati documenti con versione per le prime pagine-------------------------------------------------
+\newcommand{\pianodiprogettoi}{Piano di progetto v2.0.0}
+\newcommand{\pianodiqualificai}{Piano di qualifica v2.0.0}
+\newcommand{\normediprogettoi}{Norme di progetto v2.0.0}
+\newcommand{\studiodifattibilitai}{Studio di fattibilità v2.0.0}
+\newcommand{\analisideirequisitii}{Analisi dei requisiti v2.0.0}
+\newcommand{\specificatecnicai}{Specifica tecnica v1.0.0}
+\newcommand{\definizionediprodottoi}{Definizione di prodotto v1.0.0}
+\newcommand{\manualeutentei}{Manuale utente v1.0.0}
+\newcommand{\glossarioi}{Glossario v2.0.0}
+%----------------FINE comandi personalizzati documenti con versione per le prime pagine-------------------------------------------------
+
+%----------------INIZIO comandi personalizzati revisioni-------------------------------------------------
+\newcommand{\revisionedeirequisiti}{\textbf{Revisione dei Requisiti}}
+\newcommand{\revisionediaccettazione}{\textbf{Revisione di Accettazione}}
+\newcommand{\revisionediprogettazione}{\textbf{Revisione di Progettazione}}
+\newcommand{\revisionediprogettazionemax}{\textbf{Revisione di Progettazione Massima}}
+\newcommand{\revisionediqualifica}{\textbf{Revisione di Qualifica}}
+
+%------------------------COMANDO PER INDICARE TERMINE NEL GLOSSARIO-----------------------------------
+\newcommand{\gl}[1]{#1\ped{\ped{G}}}
+%----------------FINE comandi personalizzati revisioni-------------------------------------------------
+
+
+\newcommand{\frmdate}[3]{#3-#2-#1}
+\newcommand{\frmtime}[2]{#1:#2}
+\newcommand{\frmURI}[1]{\color{blue}\textit{#1}}
+\newcommand{\frmspath}[1]{\texttt{#1}}
+\newcommand{\frmrole}[1]{\textit{#1}}
+\newcommand{\frmdoc}[1]{\textit{“#1”}}
+\newcommand{\frmfile}[1]{\texttt{“#1”}}
+\newcommand{\frmrev}[1]{\textbf{#1}}
+\newcommand{\frmphase}[1]{\textbf{#1}}
+
+\newcommand{\progetto}{\textit{AtAVi}}
+
+%-------------------INIZIO creazione subsubparagraph--------------------------------------
+%\makeatletter
+%\newcounter{subsubparagraph}[subparagraph]
+%\def\toclevel@subsubparagraph{6}
+%\renewcommand\thesubsubparagraph{%
+%  \thesubparagraph.\@arabic\c@subsubparagraph}
+%\newcommand\subsubparagraph{%
+%  \@startsection{subsubparagraph}    % counter
+%    {6}                              % level
+%    {\parindent}                     % indent
+%    {3.25ex \@plus 1ex \@minus .2ex} % beforeskip
+%    {-1em}                           % afterskip
+%    {\normalfont\normalsize\bfseries}}
+%\newcommand\l@subsubparagraph{\@dottedtocline{6}{13.5em}{5em}}
+%\newcommand{\subsubparagraphmark}[1]{}
+%\setcounter{tocdepth}{6}
+%\setcounter{}{6} % aggiunge contatore ai paragrafi
+%\makeatother
+%-------------------FINE creazione subsubparagraph--------------------------------------
+
+\newcommand{\logo}{
+	\vspace{2cm}{
+		\includegraphics[height=4cm,keepaspectratio]{Style/logo/logoPiTest} \DeclareGraphicsExtensions{.png}\par
+	}
+	\vspace{2cm}{
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoPi} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoAndroid} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoDocker} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoArchLinux} \DeclareGraphicsExtensions{.png}
+		\par
+	}
+	\vspace{1cm}{
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoBlackArch} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoAircrack} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoNodeJS} \DeclareGraphicsExtensions{.png}
+		\includegraphics[height=2.5cm,keepaspectratio]{Style/logo/logoWireshark} \DeclareGraphicsExtensions{.png}
+	}
+	\vfill
+	\texttt{\mailstudenti}, \texttt{\mailbertof}
+
+}
+
+%-------------------FINE comandi personalizzati-----------------------------------------
+
+\endinput
