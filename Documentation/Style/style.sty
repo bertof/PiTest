@@ -41,6 +41,7 @@
 \RequirePackage{xcolor}
 
 \RequirePackage{scalerel} 	%scalare immagini ad altezza testo
+\usepackage{grffile}		%supporto a file con spazi
 
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -124,7 +125,7 @@
 		\fancyhf{}
 			\lhead{\includegraphics[height=1cm,width=1cm,keepaspectratio]{Style/logo/logoPiTest} \DeclareGraphicsExtensions{.png}}
 
-		\rhead{\emph{\leftmark} }
+		\rhead{\emph{\rightmark} }
 
 		\rfoot{ Pagina \thepage~di \pageref{LastPage} }
 
