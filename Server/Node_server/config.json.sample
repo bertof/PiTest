@@ -1,3 +1,4 @@
 {
-  "authenticationToken":"Insert a token here, it will be used to authenticate any command"
+  "authenticationToken": "Insert a token here, it will be used to authenticate any command",
+  "serverPort": 4646
 }
