@@ -39,11 +39,11 @@
             The architecture chosen is a simple server-client, since the network used to communicate between the Raspberry Pi and the client is self contained and most of the time the server will have only one client connected at a time.
 
         \subparagraph{network}
-            Since the necessity of a simple way to connect to the board and transfer any kind of data between the server and the client, I've choose to generate a WiFi hot-spot on the board; this way the connection is wireless and fast and the Ethernet port is free to use. The 3 USB ports remaining can still be used to control directly the board or to plug in other devices.
+            Since the necessity of a simple way to connect to the board and transfer any kind of data between the server and the client, I have choose to generate a WiFi hot-spot on the board; this way the connection is wireless and fast and the Ethernet port is free to use. The 3 USB ports remaining can still be used to control directly the board or to plug in other devices.
 
         \subparagraph{Software}
             The main difficulty with software is compatibility, so the most effective solution is to virtualize a minified system with only the applications needed for the task. The most effective way to achieve this is using a Docker container, specifically built for that single application. This solution allows controlled transparency of both hardware and software, excluding the possibility of dependency collision and incompatibility.\\
-            As base to the container software I've chosen to use a minified version of Black Arch, an Arch Linux based distribution with built in support for a variety of penetration testing software, still maintaining small size and ease of use. \\
+            As base to the container software I have chosen to use a minified version of Black Arch, an Arch Linux based distribution with built in support for a variety of penetration testing software, still maintaining small size and ease of use. \\
             The main application, which exposes a REST API and allows to execute given commands, scripts and tasks is a NodeJS server. This choice allows a simple development, given the modularity of the framework, and cros-platform compatibility.\\
             The network is controlled by a hostapd daemon on the main operating system and the network is managed by both a dhcpcd and a dnsmasq services, to allow network NAT.
 
