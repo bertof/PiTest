@@ -14,15 +14,52 @@
     
     \begin{figure}[!h]
         \centering
-        \includegraphics[width=\textwidth+1cm, height=10cm, keepaspectratio]{\detokenize{UML/png/Model__Achitecture Diagram_4.png}}
+        \includegraphics[width=\textwidth+1cm, height=10cm, keepaspectratio]{\detokenize{UML/png/Model__Achitecture Diagram_1.png}}
         \caption{High level architectural diagram}
     \end{figure}
 
+    \subsubsection{Modules}
+
+    \paragraph{index.js}
+    This is the main file of the application, it creates an Express app and loads all the routes of the web app.
+    
+    \paragraph{root}
+    Defines the behaviour of the root page (\texttt{/}), it's purpose is to respond with a custom welcome message.
+
+    \paragraph{info}
+    Defines the behaviour of the root \texttt{/info}, it gives informations about the server, as its name, version and author; it requires authentication using a valid token.
+
+    \paragraph{auth}
+    Defines the behaviour of the root \texttt{/auth}, it's used to authenticate the user and requires a valid token.
+
+    \paragraph{commands}
+    Defines hte behaviour of the root \texttt{/commands}, it's used to list to the user the possible commands and all their parameters; it requires authentication using a valid token.
+
+    \paragraph{scripts}
+    Defines hte behaviour of the root \texttt{/scripts}, it's used to list to the user the possible scripts and all their parameters; it requires authentication using a valid token.
+
+    \subsubsection{Dependencies}
+    Since the necessity of a solid code base from which extend the application, I've chosen to use some common libraries, both from the standard NodeJS ones and from NPM modules.
+
+    \paragraph{fs}
+    It's a NodeJS standard library which allows to read files on the file system.
+
+    \paragraph{events}
+    It's a NodeJS standard library which allows to use the event system.
+
+    \paragraph{express}
+    It's a \npm library which allows to generate a complete webserver; it's used as a base for the REST API. (\url{https://www.npmjs.com/package/express})
+
+    \paragraph{shelljs}
+    It's a \npm library which allows to execute shell commands on the host in bot sychronous and asychronous ways. It's used to call the host executables from the server.
+
     \clearpage
 
-
-
-    \subsection{Client}
-
+    \subsection{Complete UML diagram}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth+1cm, keepaspectratio]{\detokenize{UML/png/Model__Class Diagram_0.png}}
+        \caption{High level architectural diagram}
+    \end{figure}
 
 \end{document}
