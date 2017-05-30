@@ -17,9 +17,9 @@
 					"_parent": {
 						"$ref": "AAAAAAFElm6BOFNpegQ="
 					},
-					"name": "Class Diagram",
+					"name": "Low level server diagram",
 					"visible": true,
-					"defaultDiagram": true,
+					"defaultDiagram": false,
 					"ownedViews": [
 						{
 							"_type": "UMLClassView",
@@ -14128,9 +14128,9 @@
 					"_parent": {
 						"$ref": "AAAAAAFElm6BOFNpegQ="
 					},
-					"name": "Achitecture Diagram",
+					"name": "High level server diagram",
 					"visible": true,
-					"defaultDiagram": false,
+					"defaultDiagram": true,
 					"ownedViews": [
 						{
 							"_type": "UMLPackageView",
