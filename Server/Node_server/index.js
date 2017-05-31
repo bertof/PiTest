@@ -12,6 +12,8 @@ let info = require("./root/info");
 let auth = require("./root/auth");
 let commands = require("./root/commands");
 
+let exec = require("./root/exec");
+
 //Commands
 let nmap = require("./root/Commands/nmap");
 
@@ -24,6 +26,9 @@ app.route("/info")
 
 app.route("/auth")
     .get((req, res) => auth.get(req, res));
+
+app.route("/exec")
+    .get((req, res) => exec.get(req, res));
 
 app.route("/Commands")
     .get((req, res) => commands.get(req, res));
