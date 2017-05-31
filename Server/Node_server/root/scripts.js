@@ -6,13 +6,15 @@
 let requestHandler = require("../classes/requestHandler");
 const fs = require("fs");
 
+//TODO check if it works correctly
+
 module.exports = {
     get: (req, res) => {
         let checkRequest = requestHandler.checkValidity(req, {"needsAuthentication": true});
         if (checkRequest.ok === true) {
 
             //Read content of Commands folder
-            fs.readdir("root/Commands", (err, files) => {
+            fs.readdir("root/Scripts", (err, files) => {
 
                 //Filter "..", "." and hidden files, then remove ".js" extension
                 files = files.filter((file) => {
@@ -26,20 +28,20 @@ module.exports = {
 
                 //Get info from each file and put it in a command object in the payload array
                 files.forEach((fileNameWithoutExtension) => {
-                    let commandFile = require("./Commands/" + fileNameWithoutExtension);
+                    let scriptFile = require("./Scripts/" + fileNameWithoutExtension);
 
-                    let command = {
+                    let script = {
                         "command": fileNameWithoutExtension,
-                        "calls": Object.keys(commandFile).filter((call) => {
+                        "calls": Object.keys(scriptFile).filter((call) => {
                             return ["get", "post"].includes(call);
                         })
                     };
 
                     if (fileNameWithoutExtension.hasOwnProperty("parameters")) {
-                        command.parameters = fileNameWithoutExtension.parameters;
+                        script.parameters = fileNameWithoutExtension.parameters;
                     }
 
-                    payload.push(command);
+                    payload.push(script);
                 });
 
                 //Send all the info gathered
