@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bertof.pitestremote">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +18,7 @@
             android:name=".SetupConnection"
             android:description="@string/connection_setup_desc"
             android:label="@string/connection_setup"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" android:permission="android.permission.INTERNET">
 
         </activity>
         <activity
