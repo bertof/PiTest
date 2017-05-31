@@ -9,7 +9,7 @@
     \subsection{Server}
     The server application, from now on \pitest, is installed on the Operating System of the board and needs NodeJS to work.
 
-    \subsubsection{Class diagram}
+    \subsubsection{Architecture diagram}
     The following is an high level diagram of the architecture of \pitest.
     
     \begin{figure}[!h]
@@ -17,6 +17,18 @@
         \includegraphics[width=\textwidth+1cm, height=10cm, keepaspectratio]{\detokenize{UML/png/Model__High level server diagram_1.png}}
         \caption{High level architectural diagram}
     \end{figure}
+
+    \clearpage
+
+    \subsubsection{Low level class diagram}
+
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth+1cm, keepaspectratio]{\detokenize{UML/png/Model__Low level server diagram_0.png}}
+        \caption{Low level UML diagram of PiTest}
+    \end{figure}
+
+    \clearpage
 
     \subsubsection{Modules}
 
@@ -52,17 +64,25 @@
 
     \paragraph{shelljs}
     It's a \npm library which allows to execute shell commands on the host in bot synchronous and asynchronous ways. It's used to call the host executables from the server.
+    
 
-    \clearpage
-
-    \subsection{Low level UML diagram}
-    \begin{figure}[!h]
-        \centering
-        \includegraphics[width=\textwidth+1cm, keepaspectratio]{\detokenize{UML/png/Model__Low level server diagram_0.png}}
-        \caption{Low level UML diagram of PiTest}
-    \end{figure}
-
-    \subsection{Commands and scripts}
+    \subsubsection{Commands and scripts}
     To easily control the execution of commands and scripts I have chosen to create two respective wrapper classes, which contain all the information needed for the execution, have a simple interface to start the execution and retrieve the result with a callback. Also, every time there is an output, both on \texttt{STDERR} or \texttt{STDOUT} from the shell, an event, containing the relevant data, is created.
+
+    \subsubsection{Virtualization for abstraction}
+    Since not all applications can coexist on the same Operating System I have chosen to use Docker to separate and abstract the layer of control from the layer of execution. This way, it is possible to work with several distributions, in parallel, on the same system, and each one, possibly, with a different configuration.
+    Every preconfigured command works on a Docker container, so the host is kept safe from possible vulnerabilities, while maintaining all its potential.
+
+    \subsection{Client}
+    <Descrizione> TODO
+
+    \subsubsection{Interface}
+    <Descrizione> TODO
+
+    \subsubsection{REST CALLS}
+    <Descrizione> TODO
+
+    \subsubsection{Command output customization}
+    <Descrizione> TODO
 
 \end{document}
