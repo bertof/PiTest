@@ -1,83 +1,59 @@
 package com.bertof.pitestremote;
 
-import android.os.Build;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+import com.bertof.pitestremote.API_client.ConnectionTester;
+
+import java.net.ConnectException;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
-import java.util.Scanner;
 
 public class SetupConnection extends AppCompatActivity {
 
-    private static final int CONNECTION_TIMEOUT = 2000;
-    private static final int DATA_RETRIEVAL_TIMEOUT = 2000;
+    private EditText urlFieldEditText;
+    private EditText portFiledEditText;
+    private Button connectButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_setup_connection);
+
+        urlFieldEditText = (EditText) findViewById(R.id.hostnameTextEdit);
+        portFiledEditText = (EditText) findViewById(R.id.portTextEdit);
+        connectButton = (Button) findViewById(R.id.connectButton);
+
     }
 
-    /**
-     * Test if the server is running at the addres-port given
-     *
-     * @param url complete url of the server
-     * @return true if connection successful, false otherwise
-     */
-    public static boolean testConnection(URL url) {
-        disableConnectionReuseIfNecessary();
 
-        HttpURLConnection urlConnection = null;
-        try {
+    public void connectButton_TestConnection(View v) throws MalformedURLException {
 
-            //Create connection
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
-            urlConnection.setReadTimeout(DATA_RETRIEVAL_TIMEOUT);
+        URL target = new URL("http", urlFieldEditText.getText().toString(), Integer.parseInt(portFiledEditText.getText().toString()), "/");
 
-
-            //Handle issues
-            int statusCode = urlConnection.getResponseCode();
-            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                //Handle unauthorization
-            } else if (statusCode != HttpURLConnection.HTTP_OK) {
-                //Handle any other error
+        new AsyncTask<URL, Void, Boolean>() {
+            @Override
+            protected Boolean doInBackground(URL... target) {
+                return ConnectionTester.testConnection(target[0]);
             }
 
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            String result = new Scanner(in).useDelimiter("\\A").next();
-            System.out.println(result);
-
-            return true;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (SocketTimeoutException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(SetupConnection.this, "Connection successful", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SetupConnection.this, "Something is wrong", Toast.LENGTH_SHORT).show();
+                }
             }
-        }
-
-        return false;
+        }.execute(target);
     }
-
-    private static void disableConnectionReuseIfNecessary() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-            System.setProperty("http.keepAlive", "false");
-        }
-    }
-
 
 }
