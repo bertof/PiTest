@@ -40,8 +40,13 @@ module.exports = {
                 res.send("<pre>" + outputText + "</pre>");
                 break;
 
-            default:
+            case "debug":
                 res.send("<pre>OUTPUT<br/>\n<br/>\n" + outputText + "<br/>\n<br/>\nJSON<br/>\n<br/>\n" + outputJSON + "</pre>");
+                break;
+
+            default :
+                res.send(outputJSON);
+                break;
         }
         if (typeof callback === "function") {
             callback(null, {"json": outputJSON, "text": outputText});

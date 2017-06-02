@@ -4,9 +4,15 @@
 "use strict";
 
 let requestHandler = require("../classes/requestHandler");
+let outputHandler = require("../classes/outputHandler");
+
+const message = "PiTest server running";
 
 module.exports = {
     get: (req, res) => {
-        res.send("PiTest server running");
+
+        const payload = {"output": [{"id": 0, "text": message}]};
+
+        outputHandler.handle(req, res, payload);
     }
 };
