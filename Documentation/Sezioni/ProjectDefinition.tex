@@ -4,19 +4,31 @@
 
 \section{Project definition}
 
-    The project definition will be splitted in two sections, describing the server and on the client.
+    The project definition will be split in two sections, describing the server and on the client.
 
     \subsection{Server}
     The server application, from now on \pitest, is installed on the Operating System of the board and needs NodeJS to work.
 
-    \subsubsection{Class diagram}
+    \subsubsection{Architecture diagram}
     The following is an high level diagram of the architecture of \pitest.
     
     \begin{figure}[!h]
         \centering
-        \includegraphics[width=\textwidth+1cm, height=10cm, keepaspectratio]{\detokenize{UML/png/Model__Achitecture Diagram_1.png}}
+        \includegraphics[width=\textwidth+1cm, height=10cm, keepaspectratio]{\detokenize{UML/png/Model__High level server diagram_1.png}}
         \caption{High level architectural diagram}
     \end{figure}
+
+    \clearpage
+
+    \subsubsection{Low level class diagram}
+
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth+1cm, keepaspectratio]{\detokenize{UML/png/Model__Low level server diagram_0.png}}
+        \caption{Low level UML diagram of PiTest}
+    \end{figure}
+
+    \clearpage
 
     \subsubsection{Modules}
 
@@ -27,19 +39,19 @@
     Defines the behaviour of the root page (\texttt{/}), it's purpose is to respond with a custom welcome message.
 
     \paragraph{info}
-    Defines the behaviour of the root \texttt{/info}, it gives informations about the server, as its name, version and author; it requires authentication using a valid token.
+    Defines the behaviour of the root \texttt{/info}, it gives information about the server, as its name, version and author; it requires authentication using a valid token.
 
     \paragraph{auth}
     Defines the behaviour of the root \texttt{/auth}, it's used to authenticate the user and requires a valid token.
 
     \paragraph{commands}
-    Defines hte behaviour of the root \texttt{/commands}, it's used to list to the user the possible commands and all their parameters; it requires authentication using a valid token.
+    Defines the behaviour of the root \texttt{/commands}, it's used to list to the user the possible commands and all their parameters; it requires authentication using a valid token.
 
     \paragraph{scripts}
-    Defines hte behaviour of the root \texttt{/scripts}, it's used to list to the user the possible scripts and all their parameters; it requires authentication using a valid token.
+    Defines GTE behaviour of the root \texttt{/scripts}, it's used to list to the user the possible scripts and all their parameters; it requires authentication using a valid token.
 
     \subsubsection{Dependencies}
-    Since the necessity of a solid code base from which extend the application, I've chosen to use some common libraries, both from the standard NodeJS ones and from NPM modules.
+    Since the necessity of a solid code base from which extend the application, I have chosen to use some common libraries, both from the standard NodeJS ones and from NPM modules.
 
     \paragraph{fs}
     It's a NodeJS standard library which allows to read files on the file system.
@@ -48,18 +60,31 @@
     It's a NodeJS standard library which allows to use the event system.
 
     \paragraph{express}
-    It's a \npm library which allows to generate a complete webserver; it's used as a base for the REST API. (\url{https://www.npmjs.com/package/express})
+    It's a \npm library which allows to generate a complete web server; it's used as a base for the REST API. (\url{https://www.npmjs.com/package/express})
 
     \paragraph{shelljs}
-    It's a \npm library which allows to execute shell commands on the host in bot sychronous and asychronous ways. It's used to call the host executables from the server.
+    It's a \npm library which allows to execute shell commands on the host in bot synchronous and asynchronous ways. It's used to call the host executables from the server.
+    
 
-    \clearpage
+    \subsubsection{Commands and scripts}
+    To easily control the execution of commands and scripts I have chosen to create two respective wrapper classes, which contain all the information needed for the execution, have a simple interface to start the execution and retrieve the result with a callback. Also, every time there is an output, both on \texttt{STDERR} or \texttt{STDOUT} from the shell, an event, containing the relevant data, is created.
 
-    \subsection{Complete UML diagram}
-    \begin{figure}[!h]
-        \centering
-        \includegraphics[width=\textwidth+1cm, keepaspectratio]{\detokenize{UML/png/Model__Class Diagram_0.png}}
-        \caption{High level architectural diagram}
-    \end{figure}
+    \subsubsection{Virtualization for abstraction}
+    Since not all applications can coexist on the same Operating System I have chosen to use Docker to separate and abstract the layer of control from the layer of execution. This way, it is possible to work with several distributions, in parallel, on the same system, and each one, possibly, with a different configuration.
+    Every preconfigured command works on a Docker container, so the host is kept safe from possible vulnerabilities, while maintaining all its potential.
+
+    \subsection{Client}
+    <Descrizione> TODO
+
+    \subsubsection{Interface}
+    The interface of the client will allow the user to test the connection to the server with an authentication test. Next, if the connection is correct, the app will show a list of possible commands, which contents depend on the commands allowed by the server. Each of this command will have a short description and an execute button.
+    When the command is executed the app will show the result of the execution in a customized graphic, if possible.
+    It is also possible to execute an arbitrary command: the user is allowed to enter the full command in a text box.
+
+    \subsubsection{REST CALLS}
+    Every communication ongoing between the client and the server is through a REST API. This way the client can manage multiple asynchronous commands in parallel and maintain an high level of security, as every call needs to be authenticated by a token.
+
+    \subsubsection{Command output customization}
+    The use of a GUI allow to show the output of the server with a simple interface, which can be less intimidating than a shell for a non experienced user.
 
 \end{document}
