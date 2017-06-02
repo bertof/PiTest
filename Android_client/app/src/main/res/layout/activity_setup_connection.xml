@@ -105,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="asfasfafafsasf"
+            android:onClick="connectButton_TestConnection"
             android:text="@string/connection_setup_connect_button"
             tools:text="@string/connection_setup_connect_button" />
 

@@ -7,6 +7,6 @@ let requestHandler = require("../classes/requestHandler");
 
 module.exports = {
     get: (req, res) => {
-        res.send("<pre>PiTest server running: " + require("../package.json").version + "</pre>");
+        res.send("PiTest server running");
     }
 };
