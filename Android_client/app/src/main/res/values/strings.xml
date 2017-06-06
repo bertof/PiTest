@@ -9,4 +9,5 @@
     <string name="token_hint">Token</string>
     <string name="show_token_hint">Show token</string>
     <string name="connection_setup_connect_button">Connect</string>
+    <string name="title_activity_action_list">ActionListActivity</string>
 </resources>

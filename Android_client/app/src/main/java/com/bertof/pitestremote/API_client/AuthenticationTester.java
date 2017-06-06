@@ -52,7 +52,7 @@ public class AuthenticationTester {
     public static Boolean testAuthentication(String host, Integer port, String token) {
 
         HttpClient httpClient = new DefaultHttpClient();
-        
+
         try {
 
             URL url = new URL(new URI("http", null, host, port, AUTH_PATH, "token=" + token, null).toString());
