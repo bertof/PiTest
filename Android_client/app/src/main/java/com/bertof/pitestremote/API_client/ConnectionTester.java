@@ -1,25 +1,53 @@
 package com.bertof.pitestremote.API_client;
 
-import android.os.Build;
+import android.content.pm.PackageInstaller;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.io.BufferedInputStream;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
 import java.net.URL;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
- * Created by pily on 01/06/17.
+ * Created by bertof on 01/06/17.
  */
 
 public class ConnectionTester {
 
-    private static final int CONNECTION_TIMEOUT = 2000;
-    private static final int DATA_RETRIEVAL_TIMEOUT = 2000;
+    private class ConnectionTesterResponse {
+        ArrayList<ConnectionTesterResponseOutputItem> output;
+    }
+
+    private class ConnectionTesterResponseOutputItem {
+        Integer id;
+        String text;
+    }
+
     private static final String SERVER_WELCOME_MESSAGE = "PiTest server running";
+
 
     /**
      * Test if the server is running at the addres-port given
@@ -27,49 +55,33 @@ public class ConnectionTester {
      * @param url complete url of the server
      * @return true if connection successful, false otherwise
      */
-    public static boolean testConnection(URL url) {
-        disableConnectionReuseIfNecessary();
+    @NonNull
+    public static Boolean testConnection(URL url) {
 
-        HttpURLConnection urlConnection = null;
+        HttpClient httpClient = new DefaultHttpClient();
+
         try {
+            HttpGet request = new HttpGet(url.toString());
+            HttpResponse response = httpClient.execute(request);
+            HttpEntity entity = response.getEntity();
+            String responseString = EntityUtils.toString(entity, "UTF-8");
 
-            //Create connection
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
-            urlConnection.setReadTimeout(DATA_RETRIEVAL_TIMEOUT);
+            Gson gson = new Gson();
+            ConnectionTesterResponse ctr = gson.fromJson(responseString, ConnectionTesterResponse.class);
 
+            //TODO TEMP DEBUG
+            Log.d(TAG, responseString);
 
-            //Handle issues
-            int statusCode = urlConnection.getResponseCode();
-            if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                //Handle unauthorization
-            } else if (statusCode != HttpURLConnection.HTTP_OK) {
-                //Handle any other error
-            }
+            return ctr.output.get(0).id.equals(0) && ctr.output.get(0).text.equals(SERVER_WELCOME_MESSAGE);
 
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            String result = new Scanner(in).useDelimiter("\\A").next();
-
-            return result.matches(SERVER_WELCOME_MESSAGE);
-
-        } catch (MalformedURLException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (SocketTimeoutException e) {
+        } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
         }
 
         return false;
-    }
-
-    private static void disableConnectionReuseIfNecessary() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
-            System.setProperty("http.keepAlive", "false");
-        }
     }
 }
