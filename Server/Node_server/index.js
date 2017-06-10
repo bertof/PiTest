@@ -19,6 +19,7 @@ let exec = require("./root/exec");
 let nmap = require("./root/Commands/nmap");
 
 //Scripts
+let airodump_scan = require("./root/Scripts/airodump_scan");
 
 //Setting up roots
 app.route("/")
@@ -41,6 +42,9 @@ app.route("/Commands/nmap")
 
 app.route("/Scripts")
     .get((req, res) => scripts.get(req, res));
+
+app.route("/Scripts/airodump_scan")
+    .get((req, res) => airodump_scan.get(req, res));
 
 //Set up listening port
 app.listen(config.serverPort);

@@ -36,12 +36,16 @@ module.exports = {
                 res.send(outputJSON);
                 break;
 
-            case "text":
+            case "pre":
                 res.send("<pre>" + outputText + "</pre>");
                 break;
 
             case "debug":
                 res.send("<pre>OUTPUT<br/>\n<br/>\n" + outputText + "<br/>\n<br/>\nJSON<br/>\n<br/>\n" + outputJSON + "</pre>");
+                break;
+
+            case "raw":
+                res.send(outputText);
                 break;
 
             default :
