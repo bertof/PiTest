@@ -13,8 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
             android:name=".SetupConnection"
             android:description="@string/connection_setup_desc"
@@ -36,6 +34,10 @@
                     android:scheme="android-app-pitest-remote-demo" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ActionListActivity"
+            android:label="@string/title_activity_action_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
