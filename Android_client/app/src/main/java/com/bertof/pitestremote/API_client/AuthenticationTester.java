@@ -2,6 +2,7 @@ package com.bertof.pitestremote.API_client;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -34,9 +35,37 @@ public class AuthenticationTester {
     private static final String AUTH_PATH = "/auth";
     private static final String VALID_REQUEST_MESSAGE = "valid request";
 
-    private class AuthenticationTesterResponse {
+    public class AuthenticationTesterResponse {
+
+        public AuthenticationTesterResponse(@NonNull Boolean ok, String error) throws Exception {
+            this(ok, error, null);
+        }
+
+        public AuthenticationTesterResponse(@NonNull Boolean ok, String info, @Nullable String error) throws Exception {
+            if (ok.equals(true) && !(error == null)) {
+                throw new Exception("Ok must be false if only error string given");
+            }
+            this.ok = ok;
+            this.info = info;
+            this.error = error;
+        }
+
+        public Boolean getOk() {
+            return ok;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        @Nullable
+        public String getError() {
+            return error;
+        }
+
         private Boolean ok;
         private String info;
+        @Nullable
         private String error;
     }
 
@@ -49,33 +78,32 @@ public class AuthenticationTester {
      * @return true if connection successful, false otherwise
      */
     @NonNull
-    public static Boolean testAuthentication(String host, Integer port, String token) {
+    public static Boolean testAuthentication(String host, Integer port, String token) throws Exception {
+
+        AuthenticationTesterResponse authenticationTesterResponse = testAuthenticationCall(host, port, token);
+
+        return authenticationTesterResponse.getOk().equals(true) && authenticationTesterResponse.getInfo().equals(VALID_REQUEST_MESSAGE);
+    }
+
+    public static AuthenticationTesterResponse testAuthenticationCall(String hostname, Integer port, String token) throws Exception {
 
         HttpClient httpClient = new DefaultHttpClient();
 
+        URI target = new URI("http", null, hostname, port, AUTH_PATH, "token=" + token, null);
+
         try {
-
-            URL url = new URL(new URI("http", null, host, port, AUTH_PATH, "token=" + token, null).toString());
-
-            Log.d(TAG, url.toString());
-
-            HttpGet request = new HttpGet(url.toString());
+            HttpGet request = new HttpGet(target);
             HttpResponse response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
             String responseString = EntityUtils.toString(entity, "UTF-8");
 
             Gson gson = new Gson();
-            AuthenticationTester.AuthenticationTesterResponse atr = gson.fromJson(responseString, AuthenticationTester.AuthenticationTesterResponse.class);
+            return gson.fromJson(responseString, AuthenticationTester.AuthenticationTesterResponse.class);
 
-            //TODO TEMP DEBUG
-            Log.d("Authentication", responseString);
-
-            return atr.ok.equals(true) && atr.info.equals(VALID_REQUEST_MESSAGE);
-
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return false;
+        throw new Exception("Connection failed");
     }
 }

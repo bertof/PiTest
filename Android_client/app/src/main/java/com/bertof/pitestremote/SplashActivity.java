@@ -3,7 +3,6 @@ package com.bertof.pitestremote;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -11,7 +10,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(this, SetupConnection.class);
+        Intent intent = new Intent(this, SetupConnectionActivity.class);
 
         startActivity(intent);
         finish();

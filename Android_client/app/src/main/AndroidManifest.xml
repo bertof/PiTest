@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SetupConnection"
+            android:name=".SetupConnectionActivity"
             android:description="@string/connection_setup_desc"
             android:label="@string/connection_setup"
             android:permission="android.permission.INTERNET"
@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
