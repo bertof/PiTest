@@ -18,4 +18,9 @@
     <string name="connection_failed_error">The connection to the host failed.</string>
     <string name="wrong_token_error">The token entered is invalid.</string>
     <string name="connection_succeeded">Connection succeeded!</string>
+    <string name="execute_command">Execute a command</string>
+    <string name="list_scripts">List available scripts</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="default_host_info_fragment_text">Welcome to PiTest</string>
 </resources>
