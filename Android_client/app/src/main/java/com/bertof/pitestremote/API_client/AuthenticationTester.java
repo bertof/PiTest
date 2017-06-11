@@ -57,8 +57,6 @@ public class AuthenticationTester {
 
             URL url = new URL(new URI("http", null, host, port, AUTH_PATH, "token=" + token, null).toString());
 
-            Log.d(TAG, url.toString());
-
             HttpGet request = new HttpGet(url.toString());
             HttpResponse response = httpClient.execute(request);
             HttpEntity entity = response.getEntity();
