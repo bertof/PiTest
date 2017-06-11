@@ -1,6 +1,5 @@
 package com.bertof.pitestremote;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bertof.pitestremote.API_client.AuthenticationTester;
@@ -110,7 +108,7 @@ public class SetupConnection extends AppCompatActivity {
 
                         editor.apply();
 
-                        Intent intent = new Intent(getApplicationContext(), ActionListActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ChooseActionActivity.class);
                         Log.d("INTENT", intent.toString());
                         startActivity(intent);
 
