@@ -11,8 +11,6 @@ const message = "PiTest server running";
 module.exports = {
     get: (req, res) => {
 
-        const payload = {"output": [{"id": 0, "text": message}]};
-
-        outputHandler.handle(req, res, payload);
+        outputHandler.handleRawMessage(req, res, message);
     }
 };

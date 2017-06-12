@@ -4,32 +4,38 @@
 
 let Command = require("../../classes/command");
 let outputHandler = require("../../classes/outputHandler");
-let authenticator = require("../../classes/authenticator");
+let requestHandler = require("../../classes/requestHandler");
 
 module.exports = {
+    description: "nmap - Network exploration e security instrument / port scanner",
     get: function (req, res) {
 
-        if (req.query.hasOwnProperty("token") && authenticator.authenticate(req.query.token) === true) {
+        let checkReq = requestHandler.checkValidity(req, {"needsAuthentication": true});
+
+        if (checkReq.ok === true) {
 
             let parameters = "";
             if (req.query.hasOwnProperty("parameters") && typeof req.query.parameters === "string") {
                 parameters = req.query.parameters;
             }
 
-            console.log("EXECUTING: " + "nmap " + parameters);
-            let nmap = new Command("nmap " + parameters, function (child) {
+            console.log("EXECUTING: " + "nmap" + " " + parameters);
+            let nmap = new Command("nmap" + " " + parameters, function (child) {
 
-                outputHandler.handle(req, res, child);
+                outputHandler.handleChild(req, res, child);
             });
+
             // nmap.emitter.on("outdata", (data) => {
             //     // console.log("Outdata:", data);
             // });
             // nmap.emitter.on("errdata", (data) => {
             //     // console.log("Error:", data);
             // });
+
             nmap.startExecution();
+
         } else {
-            res.send("<pre>Invalid token passed</pre>");
+            res.send(checkReq);
         }
 
 

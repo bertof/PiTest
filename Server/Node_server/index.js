@@ -34,16 +34,16 @@ app.route("/auth")
 app.route("/exec")
     .get((req, res) => exec.get(req, res));
 
-app.route("/Commands")
+app.route("/commands")
     .get((req, res) => commands.get(req, res));
 
-app.route("/Commands/nmap")
+app.route("/commands/nmap")
     .get((req, res) => nmap.get(req, res));
 
-app.route("/Scripts")
+app.route("/scripts")
     .get((req, res) => scripts.get(req, res));
 
-app.route("/Scripts/airodump_scan")
+app.route("/scripts/airodump_scan")
     .get((req, res) => airodump_scan.get(req, res));
 
 //Set up listening port

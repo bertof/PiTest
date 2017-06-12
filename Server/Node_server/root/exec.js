@@ -20,7 +20,7 @@ module.exports = {
 
             console.log("EXECUTING: " + command);
             let concreteCommand = new Command(command, (child) => {
-                outputHandler.handle(req, res, child);
+                outputHandler.handleChild(req, res, child);
             });
             // concreteCommand.emitter.on("outdata", (data) => {
             //     // console.log("Outdata:", data);

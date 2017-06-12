@@ -32,7 +32,8 @@ module.exports = {
                         "command": fileNameWithoutExtension,
                         "calls": Object.keys(commandFile).filter((call) => {
                             return ["get", "post"].includes(call);
-                        })
+                        }),
+                        "description": commandFile.description !== undefined ? commandFile.description : null
                     };
 
                     if (fileNameWithoutExtension.hasOwnProperty("parameters")) {

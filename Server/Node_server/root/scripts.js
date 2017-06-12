@@ -19,6 +19,8 @@ module.exports = {
                 //Filter "..", "." and hidden files, then remove ".js" extension
                 files = files.filter((file) => {
                     return file.match(/^[^\.]/);
+                }).filter((file) => {
+                    return file.match(/\.js$/);
                 }).map((file) => {
                         return file.replace(/\.js$/, "");
                     }
@@ -31,10 +33,12 @@ module.exports = {
                     let scriptFile = require("./Scripts/" + fileNameWithoutExtension);
 
                     let script = {
-                        "command": fileNameWithoutExtension,
+                        "script": fileNameWithoutExtension,
                         "calls": Object.keys(scriptFile).filter((call) => {
                             return ["get", "post"].includes(call);
-                        })
+                        }),
+                        "description": scriptFile.description !== undefined ? scriptFile.description : null
+
                     };
 
                     if (fileNameWithoutExtension.hasOwnProperty("parameters")) {
