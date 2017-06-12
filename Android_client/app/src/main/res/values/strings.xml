@@ -10,4 +10,17 @@
     <string name="show_token_hint">Show token</string>
     <string name="connection_setup_connect_button">Connect</string>
     <string name="title_activity_action_list">ActionListActivity</string>
+    <string name="negative_port_error">The port can not be a negative number.</string>
+    <string name="empty_port_error">The port parameter can not be empty.</string>
+    <string name="empty_hostname_error">The hostname parameter can not be empty.</string>
+    <string name="connection_refused_error">The connection has been refuse by the host.</string>
+    <string name="invalid_uri_error">The hostname and port combination entered is invalid.</string>
+    <string name="connection_failed_error">The connection to the host failed.</string>
+    <string name="wrong_token_error">The token entered is invalid.</string>
+    <string name="connection_succeeded">Connection succeeded!</string>
+    <string name="execute_command">Execute a command</string>
+    <string name="list_scripts">List available scripts</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="default_host_info_fragment_text">Welcome to PiTest</string>
 </resources>

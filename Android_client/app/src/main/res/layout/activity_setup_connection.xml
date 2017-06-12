@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bertof.pitestremote.SetupConnection">
+    tools:context="com.bertof.pitestremote.SetupConnectionActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="asfasfafafsasf"
-            android:onClick="connectButton_TestConnection"
+            android:onClick="connectButton_test_connection_and_authentication"
             android:text="@string/connection_setup_connect_button"
             tools:text="@string/connection_setup_connect_button" />
 

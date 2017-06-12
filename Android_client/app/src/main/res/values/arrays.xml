@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_menu_entries">
+        <item>@string/execute_command</item>
+        <item>@string/list_scripts</item>
+        <item>@string/list_commands</item>
+    </string-array>
+</resources>

@@ -3,6 +3,6 @@
     android:opacity="opaque">
     <item android:drawable="@android:color/white" />
     <item
-        android:drawable="@drawable/raspi_logo"
-        android:gravity="center"/>
+        android:drawable="@drawable/pitest_logo"
+        android:gravity="center" />
 </layer-list>

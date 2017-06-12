@@ -1,8 +1,10 @@
 package com.bertof.pitestremote.API_client;
 
+import android.app.Activity;
 import android.content.pm.PackageInstaller;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,6 +27,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,51 +41,70 @@ import static android.content.ContentValues.TAG;
 
 public class ConnectionTester {
 
-    private class ConnectionTesterResponse {
+    public class ConnectionTesterResponse {
+        private ArrayList<ConnectionTesterResponseOutputItem> getOutput() {
+            return output;
+        }
+
         ArrayList<ConnectionTesterResponseOutputItem> output;
     }
 
-    private class ConnectionTesterResponseOutputItem {
+    public class ConnectionTesterResponseOutputItem {
+        private Integer getId() {
+            return id;
+        }
+
+        private String getText() {
+            return text;
+        }
+
         Integer id;
         String text;
     }
 
     private static final String SERVER_WELCOME_MESSAGE = "PiTest server running";
 
-
     /**
      * Test if the server is running at the addres-port given
      *
-     * @param url complete url of the server
+     * @param hostname address of the host
+     * @param port     port to access the host
      * @return true if connection successful, false otherwise
+     * @throws Exception General connection error
      */
     @NonNull
-    public static Boolean testConnection(URL url) {
+    public static Boolean testConnection(String hostname, Integer port) throws Exception {
 
+        ConnectionTesterResponse connectionTesterResponse = testConnectionCall(hostname, port);
+
+        return connectionTesterResponse.getOutput().get(0).getId().equals(0) && connectionTesterResponse.getOutput().get(0).getText().equals(SERVER_WELCOME_MESSAGE);
+    }
+
+
+    /**
+     * Method that executes a REST call to the server to verify its presence
+     *
+     * @param hostname address of the host
+     * @param port     port to access the host
+     * @return ConnectionTesterResponse object
+     * @throws java.net.URISyntaxException wrong URI signature
+     * @throws Exception                   generic connection failed exception
+     */
+    public static ConnectionTesterResponse testConnectionCall(String hostname, Integer port) throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
 
-        try {
-            HttpGet request = new HttpGet(url.toString());
-            HttpResponse response = httpClient.execute(request);
-            HttpEntity entity = response.getEntity();
-            String responseString = EntityUtils.toString(entity, "UTF-8");
 
-            Gson gson = new Gson();
-            ConnectionTesterResponse ctr = gson.fromJson(responseString, ConnectionTesterResponse.class);
+        URI target = new URI("http", null, hostname, port, "/", "", null);
 
-            //TODO TEMP DEBUG
-            Log.d(TAG, responseString);
+        Log.d("taget URI", target.toString());
 
-            return ctr.output.get(0).id.equals(0) && ctr.output.get(0).text.equals(SERVER_WELCOME_MESSAGE);
+        HttpGet request = new HttpGet(target);
+        HttpResponse response = httpClient.execute(request);
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, "UTF-8");
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        return gson.fromJson(responseString, ConnectionTesterResponse.class);
 
-        return false;
     }
 }
