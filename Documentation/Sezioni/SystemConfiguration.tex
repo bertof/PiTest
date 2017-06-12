@@ -1,0 +1,35 @@
+\documentclass[../PiTest.tex]{subfiles}
+
+\begin{document}
+
+\subsection{System configuration}
+The system will work on two machines, each with its own configuration, as explained in the next sections.
+
+\subsubsection{Server}
+The server application can generally run on any platform which supports \nodejs 8 and \docker, but the device which it will be deployed on is a Raspberry Pi B+.
+
+\paragraph{Network}
+The system requires at least a WiFi adapter, to generate the common network between the Raspberry and the smartphone, and another one to execute WiFi networks analysis.
+The network architecture chosen is a station-client one and the Raspberry is the host, meaning it needs a hostapd service to control the WiFi adapter, a dhcpcd one to route dynamically the client and a dnsmasq one to route the traffic. The Raspberry will act as a WiFi router, using NAT on its clients.\\
+The complete guide to setup the network tools on a Arch Linux system can be found in the server folder on the repository.
+
+\paragraph{Installation and configuration}
+To run the server application \docker and \nodejs and its package manager \npm must be installed on the host.\\
+Download the latest version of PiTest form the repository using a browser or \textit{git}.\\
+Build a \docker container to contain the application you want to run on the system; a \textit{Black Arch} dockerfile example is present in the server folder on the repository. It is possible to build as many container as needed to run all the applications wanted.\\
+Install all the packages necessary using \texttt{npm install} inside the node server folder; after the operation has completed you can start the server with the command \texttt{npm start}.\\
+In case you want to run all the tests of the server you can do it by using the command \texttt{npm test} inside the above mentioned folder.\\
+It is good practice to create a service file to automate the execution of the server on the system boot using systemd; the procedure may vary according to the Linux distribution chosen.
+
+\paragraph{Security}
+All the \REST calls, except the ping, need a token parameter to authenticate the user. The token is unique in the system and can be configured in the config.json file in the server folder. Also the port used to connect to the server can be changed in the same file.
+
+\subsubsection{Client}
+
+\paragraph{Build}
+The build process of the client is standard and automated thanks to \gradle. A default \textit{Android Studio} installation will be sufficient to build the application.
+
+\paragraph{Setup}
+The client needs an initial setup procedure to connect to the server; during which it will the user will be asked for the address of the server, the port used to connect to the server and the token for the authentication.
+
+\end{document}
