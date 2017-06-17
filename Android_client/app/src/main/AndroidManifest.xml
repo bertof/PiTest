@@ -14,24 +14,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SetupConnectionActivity"
-            android:description="@string/connection_setup_desc"
-            android:label="@string/connection_setup"
-            android:permission="android.permission.INTERNET"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenuActivity" />
-        <activity android:name=".ExecuteCommandActivity" />
-        <activity android:name=".GetScriptsActivity" />
-        <activity android:name=".GetCommandsActivity"></activity>
+        <activity
+            android:name=".SetupConnectionActivity"
+            android:description="@string/connection_setup_activity_desc"
+            android:label="@string/connection_setup"
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MainMenuActivity"
+            android:description="@string/main_menu_activity_description"
+            android:permission="android.permission.INTERNET" />
+        <activity
+            android:name=".ExecuteCommandActivity"
+            android:description="@string/execute_command_activity_description"
+            android:permission="android.permission.INTERNET" />
+        <activity
+            android:name=".GetScriptsActivity"
+            android:description="@string/get_scripts_activity_description"
+            android:permission="android.permission.INTERNET" />
+        <activity
+            android:name=".GetCommandsActivity"
+            android:description="@string/get_commands_activity_description"
+            android:permission="android.permission.INTERNET" />
     </application>
 
 </manifest>
