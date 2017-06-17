@@ -28,7 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenuActivity"></activity>
+        <activity android:name=".MainMenuActivity" />
+        <activity android:name=".ExecuteCommandActivity" />
+        <activity android:name=".GetScriptsActivity" />
+        <activity android:name=".GetCommandsActivity"></activity>
     </application>
 
 </manifest>

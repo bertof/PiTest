@@ -40,6 +40,8 @@ public class SetupConnectionActivity extends AppCompatActivity {
     EditText tokenFieldEditText;
     Button connectButton;
 
+    AsyncTask connectionTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -74,7 +76,15 @@ public class SetupConnectionActivity extends AppCompatActivity {
                 throw new SetupConnectionException("Negative port");
             }
 
-            new AsyncTask<Void, Void, Boolean>() {
+            /*if (connectionTask.getStatus() == AsyncTask.Status.RUNNING || connectionTask.getStatus() == AsyncTask.Status.PENDING) {
+                connectionTask.cancel(true);
+            }*/
+
+            if (connectionTask != null) {
+                connectionTask.cancel(true);
+            }
+
+            connectionTask = new AsyncTask<Void, Void, Boolean>() {
 
                 @NonNull
                 @Override

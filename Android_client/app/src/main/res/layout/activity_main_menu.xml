@@ -4,27 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bertof.pitestremote.MainMenuActivity"
-    android:orientation="vertical">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
-
-        <fragment
-            android:id="@+id/fragment"
-            android:name="com.bertof.pitestremote.HostInfoFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_host_info" />
-    </ScrollView>
+    android:orientation="vertical"
+    tools:context="com.bertof.pitestremote.MainMenuActivity">
 
     <ListView
+        android:id="@+id/mainMenuViewListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:entries="@array/main_menu_entries"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
+
+
 </LinearLayout>
