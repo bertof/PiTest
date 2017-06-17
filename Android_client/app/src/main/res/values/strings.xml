@@ -57,5 +57,11 @@ rtt min/avg/max/mdev = 28.884/39.207/50.124/8.175 ms</string>
     <string name="command_input_text_view_hint">Insert a command to execute</string>
     <string name="command_send_button_text">Send</string>
     <string name="command_send_button_hint">Send command to host</string>
+    <string name="preference_key_string">PiTest</string>
+    <string name="preference_hostname">hostname</string>
+    <string name="preference_port">port</string>
+    <string name="preference_token">token</string>
+    <string name="can_not_load_preferences_error">Can not load preferences</string>
+    <string name="empty_command_error">You are trying to send an empty command.</string>
 
 </resources>

@@ -76,10 +76,6 @@ public class SetupConnectionActivity extends AppCompatActivity {
                 throw new SetupConnectionException("Negative port");
             }
 
-            /*if (connectionTask.getStatus() == AsyncTask.Status.RUNNING || connectionTask.getStatus() == AsyncTask.Status.PENDING) {
-                connectionTask.cancel(true);
-            }*/
-
             if (connectionTask != null) {
                 connectionTask.cancel(true);
             }
@@ -99,7 +95,15 @@ public class SetupConnectionActivity extends AppCompatActivity {
                             throw new SetupConnectionException("Wrong token");
                         }
 
-                        //TODO save settings
+                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_key_string), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putString(getString(R.string.preference_hostname), hostname);
+                        editor.putInt(getString(R.string.preference_port), port);
+                        editor.putString(getString(R.string.preference_token), token);
+
+                        editor.apply();
+
 
                         runOnUiThread(new Runnable() {
                             @Override

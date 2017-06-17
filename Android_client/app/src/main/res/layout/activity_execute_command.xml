@@ -22,7 +22,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/outputTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Command result will be shown here" />
@@ -36,19 +36,22 @@
             android:orientation="horizontal"
             android:padding="5sp">
 
-            <MultiAutoCompleteTextView
+            <EditText
                 android:id="@+id/commandInputTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:ems="10"
                 android:hint="@string/command_input_text_view_hint"
-                android:maxLines="5" />
+                android:inputType="textMultiLine"
+                android:maxLines="5"/>
 
             <Button
                 android:id="@+id/sendButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
+                android:layout_gravity="bottom|end"
+                android:onClick="sendButton_onClick"
                 android:text="@string/command_send_button_text" />
         </LinearLayout>
     </LinearLayout>

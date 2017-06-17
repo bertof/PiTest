@@ -40,6 +40,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class ConnectionTester {
+    class ConnectionTesterException extends Exception {
+    }
 
     public class ConnectionTesterResponse {
         private ArrayList<ConnectionTesterResponseOutputItem> getOutput() {
@@ -90,13 +92,10 @@ public class ConnectionTester {
      * @throws java.net.URISyntaxException wrong URI signature
      * @throws Exception                   generic connection failed exception
      */
-    public static ConnectionTesterResponse testConnectionCall(String hostname, Integer port) throws Exception {
+    private static ConnectionTesterResponse testConnectionCall(String hostname, Integer port) throws Exception {
         HttpClient httpClient = new DefaultHttpClient();
 
-
         URI target = new URI("http", null, hostname, port, "/", "", null);
-
-        Log.d("taget URI", target.toString());
 
         HttpGet request = new HttpGet(target);
         HttpResponse response = httpClient.execute(request);

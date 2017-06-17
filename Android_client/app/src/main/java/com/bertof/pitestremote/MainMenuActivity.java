@@ -27,7 +27,6 @@ public class MainMenuActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainMenuActivity.this, (String) (listView.getItemAtPosition(position)) + " position " + position, Toast.LENGTH_SHORT).show();
 
                 try {
                     Intent newActivity;
