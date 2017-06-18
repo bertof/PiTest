@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@drawable/ic_refresh_black_24dp"
+        android:onClick="updateListOnClick"
+        android:title="@string/refresh_action_menu"
+        app:showAsAction="ifRoom" />
+    <item
+        android:onClick="schichia"
+        android:title="Dio caro" />
+</menu>

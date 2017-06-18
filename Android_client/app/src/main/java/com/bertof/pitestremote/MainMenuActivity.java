@@ -10,20 +10,18 @@ import android.widget.Toast;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    class MainMenuActivityException extends Exception {
+    private class MainMenuActivityException extends Exception {
         MainMenuActivityException(String message) {
             super(message);
         }
     }
-
-    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        listView = (ListView) findViewById(R.id.mainMenuViewListView);
+        ListView listView = (ListView) findViewById(R.id.mainMenuViewListView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

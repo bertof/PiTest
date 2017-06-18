@@ -15,26 +15,26 @@ import java.net.URI;
  * Created by bertof on 17/06/17.
  */
 
-public class SendCommand {
+public class SendScript {
 
-    private class SendCommandException extends Exception {
-        public SendCommandException(String message) {
+    private class SendScriptException extends Exception {
+        public SendScriptException(String message) {
             super(message);
         }
     }
 
-    private static final String EXEC_PATH = "/exec";
+    private static final String EXEC_PATH = "/scripts";
 
     @NonNull
-    public static String sendCommandWithRawResponse(String hostname, int port, String token, String command) throws Exception {
-        return sendCommandWithRawResponseCall(hostname, port, token, command).trim();
+    public static String sendScriptWithRawResponse(String hostname, int port, String token, String script) throws Exception {
+        return sendScriptWithRawResponseCall(hostname, port, token, script).trim();
     }
 
-    static String sendCommandWithRawResponseCall(String hostname, int port, String token, String command) throws Exception {
+    private static String sendScriptWithRawResponseCall(String hostname, int port, String token, String script) throws Exception {
 
         HttpClient httpClient = new DefaultHttpClient();
 
-        URI target = new URI("http", null, hostname, port, EXEC_PATH, "token=" + token + "&command=" + command + "&type=raw", null);
+        URI target = new URI("http", null, hostname, port, EXEC_PATH + "/" + script, "token=" + token + "&type=raw", null);
 
         HttpGet request = new HttpGet(target);
         HttpResponse response = httpClient.execute(request);

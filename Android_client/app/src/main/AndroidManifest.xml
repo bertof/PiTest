@@ -18,6 +18,7 @@
             android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -43,6 +44,7 @@
             android:name=".GetCommandsActivity"
             android:description="@string/get_commands_activity_description"
             android:permission="android.permission.INTERNET" />
+        <activity android:name=".ExecuteScriptActivity"></activity>
     </application>
 
 </manifest>

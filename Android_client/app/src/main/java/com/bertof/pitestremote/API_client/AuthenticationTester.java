@@ -35,26 +35,13 @@ public class AuthenticationTester {
     private static final String AUTH_PATH = "/auth";
     private static final String VALID_REQUEST_MESSAGE = "valid request";
 
-    public class AuthenticationTesterResponse {
+    private class AuthenticationTesterResponse {
 
-        public AuthenticationTesterResponse(@NonNull Boolean ok, String error) throws Exception {
-            this(ok, error, null);
-        }
-
-        public AuthenticationTesterResponse(@NonNull Boolean ok, String info, @Nullable String error) throws Exception {
-            if (ok.equals(true) && !(error == null)) {
-                throw new Exception("Ok must be false if only error string given");
-            }
-            this.ok = ok;
-            this.info = info;
-            this.error = error;
-        }
-
-        public Boolean getOk() {
+        Boolean getOk() {
             return ok;
         }
 
-        public String getInfo() {
+        String getInfo() {
             return info;
         }
 
@@ -85,7 +72,7 @@ public class AuthenticationTester {
         return authenticationTesterResponse.getOk().equals(true) && authenticationTesterResponse.getInfo().equals(VALID_REQUEST_MESSAGE);
     }
 
-    public static AuthenticationTesterResponse testAuthenticationCall(String hostname, Integer port, String token) throws Exception {
+    private static AuthenticationTesterResponse testAuthenticationCall(String hostname, Integer port, String token) throws Exception {
 
         HttpClient httpClient = new DefaultHttpClient();
 

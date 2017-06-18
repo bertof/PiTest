@@ -63,5 +63,8 @@ rtt min/avg/max/mdev = 28.884/39.207/50.124/8.175 ms</string>
     <string name="preference_token">token</string>
     <string name="can_not_load_preferences_error">Can not load preferences</string>
     <string name="empty_command_error">You are trying to send an empty command.</string>
+    <string name="select_script_text">Select one of the scripts availlable</string>
+    <string name="script_result_text">Script result will be shown here</string>
+    <string name="refresh_action_menu">Refresh</string>
 
 </resources>
