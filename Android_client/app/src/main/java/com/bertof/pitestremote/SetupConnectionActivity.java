@@ -40,6 +40,8 @@ public class SetupConnectionActivity extends AppCompatActivity {
     EditText tokenFieldEditText;
     Button connectButton;
 
+    AsyncTask connectionTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -74,7 +76,11 @@ public class SetupConnectionActivity extends AppCompatActivity {
                 throw new SetupConnectionException("Negative port");
             }
 
-            new AsyncTask<Void, Void, Boolean>() {
+            if (connectionTask != null) {
+                connectionTask.cancel(true);
+            }
+
+            connectionTask = new AsyncTask<Void, Void, Boolean>() {
 
                 @NonNull
                 @Override
@@ -89,7 +95,15 @@ public class SetupConnectionActivity extends AppCompatActivity {
                             throw new SetupConnectionException("Wrong token");
                         }
 
-                        //TODO save settings
+                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.preference_key_string), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                        editor.putString(getString(R.string.preference_hostname), hostname);
+                        editor.putInt(getString(R.string.preference_port), port);
+                        editor.putString(getString(R.string.preference_token), token);
+
+                        editor.apply();
+
 
                         runOnUiThread(new Runnable() {
                             @Override

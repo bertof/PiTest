@@ -24,7 +24,7 @@ module.exports = {
                 parameters = req.query.parameters;
             }
 
-            console.log("EXECUTING: " + path.basename(__filename) + parameters);
+            console.log("EXECUTING SCRIPT: " + path.basename(__filename, ".js") + ".sh");
             let nmap = new Command("sh ./root/Scripts/" + path.basename(__filename, ".js") + ".sh", function (child) {
                 outputHandler.handleChild(req, res, child);
             });

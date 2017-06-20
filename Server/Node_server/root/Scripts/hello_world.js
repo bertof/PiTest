@@ -1,13 +1,18 @@
 /**
+ * Created by bertof on 09/06/17.
+ */
+
+/**
  * Created by bertof on 21/05/17.
  */
 
 let Command = require("../../classes/command");
 let outputHandler = require("../../classes/outputHandler");
 let requestHandler = require("../../classes/requestHandler");
+let path = require("path");
 
 module.exports = {
-    description: "nmap - Network exploration e security instrument / port scanner",
+    description: "A simple \"Hello World\" example script",
     get: function (req, res) {
 
         let checkReq = requestHandler.checkValidity(req, {"needsAuthentication": true});
@@ -19,21 +24,17 @@ module.exports = {
                 parameters = req.query.parameters;
             }
 
-            console.log("EXECUTING: " + "nmap" + " " + parameters);
-            let nmap = new Command("nmap" + " " + parameters, function (child) {
-
+            console.log("EXECUTING SCRIPT: " + path.basename(__filename, ".js") + ".sh");
+            let nmap = new Command("sh ./root/Scripts/" + path.basename(__filename, ".js") + ".sh", function (child) {
                 outputHandler.handleChild(req, res, child);
             });
-
             // nmap.emitter.on("outdata", (data) => {
             //     // console.log("Outdata:", data);
             // });
             // nmap.emitter.on("errdata", (data) => {
             //     // console.log("Error:", data);
             // });
-
             nmap.startExecution();
-
         } else {
             res.send(checkReq);
         }
