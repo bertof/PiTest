@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,10 +12,10 @@ import com.bertof.pitestremote.API_client.SendScript;
 
 import org.apache.http.conn.HttpHostConnectException;
 
-public class ExecuteScriptActivity extends AppCompatActivity {
+public class ExecuteScriptAirodumpScanActivity extends AppCompatActivity {
 
-    private class ExecuteScriptActivityException extends Exception {
-        ExecuteScriptActivityException(String message) {
+    private class ExecuteScriptAirodumpScanActivityException extends Exception {
+        ExecuteScriptAirodumpScanActivityException(String message) {
             super(message);
         }
     }
@@ -64,7 +63,7 @@ public class ExecuteScriptActivity extends AppCompatActivity {
                 Toast.makeText(this, "Executing " + script, Toast.LENGTH_SHORT).show();
 
                 if (hostname == null || port < 0 || token == null) {
-                    throw new ExecuteScriptActivityException("Can not load preferences");
+                    throw new ExecuteScriptAirodumpScanActivityException("Can not load preferences");
                 }
 
                 scriptTask = new AsyncTask<Void, Void, String>() {
@@ -77,7 +76,7 @@ public class ExecuteScriptActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(ExecuteScriptActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ExecuteScriptAirodumpScanActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
                                 }
                             });
                         } catch (Exception e) {
@@ -93,7 +92,7 @@ public class ExecuteScriptActivity extends AppCompatActivity {
                     }
                 }.execute();
 
-            } catch (ExecuteScriptActivityException e) {
+            } catch (ExecuteScriptAirodumpScanActivityException e) {
                 switch (e.getMessage()) {
                     case "Can not load preferences":
                         e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.bertof.pitestremote.API_client;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -35,6 +36,8 @@ public class SendScript {
         HttpClient httpClient = new DefaultHttpClient();
 
         URI target = new URI("http", null, hostname, port, EXEC_PATH + "/" + script, "token=" + token + "&type=raw", null);
+
+        Log.d("Target", target.toString());
 
         HttpGet request = new HttpGet(target);
         HttpResponse response = httpClient.execute(request);

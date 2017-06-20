@@ -31,20 +31,23 @@
         <activity
             android:name=".MainMenuActivity"
             android:description="@string/main_menu_activity_description"
-            android:permission="android.permission.INTERNET" />
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ExecuteCommandActivity"
             android:description="@string/execute_command_activity_description"
-            android:permission="android.permission.INTERNET" />
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".GetScriptsActivity"
             android:description="@string/get_scripts_activity_description"
-            android:permission="android.permission.INTERNET" />
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
         <activity
-            android:name=".GetCommandsActivity"
-            android:description="@string/get_commands_activity_description"
-            android:permission="android.permission.INTERNET" />
-        <activity android:name=".ExecuteScriptActivity"></activity>
+            android:name=".ExecuteScriptActivity"
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ExecuteScriptAirodumpScanActivity"></activity>
     </application>
 
 </manifest>

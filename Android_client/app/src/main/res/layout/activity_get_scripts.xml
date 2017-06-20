@@ -6,10 +6,24 @@
     android:padding="5sp">
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:layout_marginStart="5sp"
+        android:text="@string/script_selection_description"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_script_text" />
+        android:layout_marginBottom="5sp"
+        android:layout_marginLeft="5sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginTop="5sp"
+        android:text="@string/select_script_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <ListView
         android:id="@android:id/list"
