@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">PiTest remote</string>
+    <string name="connection_setup">Connection setup</string>
+    <string name="connection_setup_activity_desc">Connection settings</string>
+    <string name="connection_setup_text_desc">This assistant will guide you through the process of connecting to a PiTest device.</string>
+    <string name="connection_setup_text_precautions">Please verify that the host is activated, it\'s connected to the network and correctly configured for the remote access.</string>
+    <string name="hostname_hint">Hostname</string>
+    <string name="port_hint">Port</string>
+    <string name="token_hint">Token</string>
+    <string name="show_token_hint">Show token</string>
+    <string name="connection_setup_connect_button">Connect</string>
+    <string name="title_activity_action_list">ActionListActivity</string>
+    <string name="negative_port_error">The port can not be a negative number.</string>
+    <string name="empty_port_error">The port parameter can not be empty.</string>
+    <string name="empty_hostname_error">The hostname parameter can not be empty.</string>
+    <string name="connection_refused_error">The connection has been refuse by the host.</string>
+    <string name="invalid_uri_error">The hostname and port combination entered is invalid.</string>
+    <string name="connection_failed_error">The connection to the host failed.</string>
+    <string name="wrong_token_error">The token entered is invalid.</string>
+    <string name="connection_succeeded">Connection succeeded!</string>
+    <string name="execute_command">Execute a command</string>
+    <string name="list_scripts">List available scripts</string>
+    <string name="main_menu_activity_description">Main menu of PiTest</string>
+    <string name="execute_command_activity_description">Execute a command on the host</string>
+    <string name="get_scripts_activity_description">List all scripts available on the host</string>
+    <string name="get_commands_activity_description">List all commands available on the host</string>
+    <string name="generic_error">Some error occurred</string>
+    <string name="example_command_output">PING google.com (216.58.205.46) 56(84) bytes of data.\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=1 ttl=55 time=31.2 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=2 ttl=55 time=45.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=3 ttl=55 time=50.1 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=4 ttl=55 time=39.9 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=5 ttl=55 time=28.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=1 ttl=55 time=31.2 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=2 ttl=55 time=45.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=3 ttl=55 time=50.1 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=4 ttl=55 time=39.9 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=5 ttl=55 time=28.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=1 ttl=55 time=31.2 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=2 ttl=55 time=45.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=3 ttl=55 time=50.1 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=4 ttl=55 time=39.9 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=5 ttl=55 time=28.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=1 ttl=55 time=31.2 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=2 ttl=55 time=45.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=3 ttl=55 time=50.1 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=4 ttl=55 time=39.9 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=5 ttl=55 time=28.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=1 ttl=55 time=31.2 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=2 ttl=55 time=45.8 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=3 ttl=55 time=50.1 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=4 ttl=55 time=39.9 ms\n
+64 bytes from mil04s24-in-f14.1e100.net (216.58.205.46): icmp_seq=5 ttl=55 time=28.8 ms\n
+--- google.com ping statistics ---\n
+6 packets transmitted, 5 received, 16% packet loss, time 5004ms\n
+rtt min/avg/max/mdev = 28.884/39.207/50.124/8.175 ms</string>
+    <string name="command_input_text_view_hint">Insert a command to execute</string>
+    <string name="command_send_button_text">Send</string>
+    <string name="command_send_button_hint">Send command to host</string>
+    <string name="preference_key_string">PiTest</string>
+    <string name="preference_hostname">hostname</string>
+    <string name="preference_port">port</string>
+    <string name="preference_token">token</string>
+    <string name="can_not_load_preferences_error">Can not load preferences</string>
+    <string name="empty_command_error">You are trying to send an empty command.</string>
+    <string name="select_script_text">Select one of the scripts availlable</string>
+    <string name="script_result_text">Script result will be shown here</string>
+    <string name="refresh_action_menu">Refresh</string>
+    <string name="script_selection_description">Script selection</string>
+
+</resources>

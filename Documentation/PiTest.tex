@@ -1,0 +1,63 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{verbatim}
+\usepackage{Style/style}
+\usepackage{color}
+\titlepage{}
+
+\date{2017-05-10}
+\intestazioni{\pitest}
+\pagestyle{empty}
+
+% COMANDI PER TABELLE ESPORTATE DA TRENDER
+% Intestazione tabelle
+\definecolor{I}{HTML}{B40404}
+% Intestazione gruppi
+\definecolor{G}{HTML}{AB5454}
+% Righe dispari tabelle
+\definecolor{D}{HTML}{E6E6E6}
+% Righe pari tabelle
+\definecolor{P}{HTML}{FFFFFF}
+% Riga di separazione tra le colonne
+\newcommand\VRule[1][\arrayrulewidth]{\color{white} \vrule width 1pt}
+
+\begin{document}
+
+	\begin{titlepage}
+		\centering
+		{\huge\bfseries \nomeprogetto\par}
+		\sottotitolo \\
+		\line(1,0){350} \\
+		{\scshape\LARGE University of Padua \par}
+		\vspace{1cm}
+		{\scshape\Large Project documentation \par}
+		\logo
+		\newpage
+		\begin{tabular}{c|c}
+			{\hfill\textbf{Version}} 				& 1.0.0 \\ 
+			{\hfill\textbf{Redaction date}} 		& 2017-06-20 \\ 
+			{\hfill\textbf{Distribution}} 		& \abujari \\
+		\end{tabular}
+	\end{titlepage}
+	
+	\pagestyle{myfront}
+	\newpage
+	\tableofcontents
+	%\newpage
+	%\listoftables
+	\newpage
+	\listoffigures
+	
+	\label{LastFrontPage}	
+	\newpage	
+	\pagestyle{mymain}
+		\subfile{Sezioni/Introduction}		
+	\newpage	
+		\subfile{Sezioni/ProblemAnalysis}
+	\newpage	
+		\subfile{Sezioni/ProjectDefinition}	
+	\newpage	
+		\subfile{Sezioni/SystemConfiguration}
+		
+	\label{LastPage}
+
+\end{document}

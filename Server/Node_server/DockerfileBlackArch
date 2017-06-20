@@ -1,0 +1,14 @@
+FROM heichblatt/blackarch:latest
+
+LABEL maintainer "berto.f@protonmail.com"
+
+# Update all system
+RUN sudo pacman -Syyu --noconfirm
+
+# Base packages installation, necessary to control host devices
+RUN sudo pacman -S --noconfirm --needed usbutils pciutils procps-ng
+
+# Applications wanted by the user
+RUN sudo pacman -S --noconfirm --needed nmap aircrack-ng metasploit rfkill
+
+ENTRYPOINT ["bash"]

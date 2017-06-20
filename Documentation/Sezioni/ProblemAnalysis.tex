@@ -1,0 +1,52 @@
+\documentclass[../PiTest.tex]{subfiles}
+
+\begin{document}
+
+\section{Problem analysis}
+
+    \subsection{Problematic factors}
+
+    The activity of penetration testing, or security auditing, pose difficulties in various in both hardware and software fields, particularly the following ones:
+
+    \subparagraph{Penetration testing tools}
+        Most penetration testing tools only work on a Linux environment and some may require dependencies which can conflict with each other.    
+
+	\subparagraph{Penetration testing in mobility}
+        Some tasks need to be executed on the field and carrying a laptop could be difficult in some situation.
+        A small and portable device is necessary to accomplish the work.
+
+    \subparagraph{Penetration testing and computational power}
+        The common tasks of security auditing can be split in two genres: the ones which need lot of computational power, such as hash cracking, and the ones which need less, such as WiFi auditing and network traffic sniffing.
+        Since the platform chosen is mobile, its computational power and it battery life are limited, meaning the project will focus mostly on the second ones. 
+	
+    \subparagraph{Penetration testing hardware}
+        Most tasks need some specific hardware to be executable, such as Software Defined Radios (SDR) or WiFi adapters. The device must have the general connectivity needed to allow the use of those tools.
+
+
+	\subsection{Solution proposed}
+        The following solution has been chosen as the most adequate to mitigate or completely solve all the problems mentioned:
+        
+        \subparagraph{Hardware}
+            The platform chosen for the project is a Rapsberry Pi B+, a System On a Chip board, featuring a single core ARM v6 processor, 512MB of RAM memory, 4 USB ports and a Ethernet adapter, plus 40 GPIO expansion pins for extra expansion. The board is powerful enough to accomplish common tasks and its power consumption is low enough to be successfully powered my a USB power bank. Also the board is about 35\$, meaning the total cost is very contained.
+        
+        \subparagraph{Penetration testing hardware}
+            I choose to use an ALFA AWS051NH v2 adapter For WiFi analysis, capable of both monitor mode and packet injection, necessary in most WiFi attacks.
+
+        \subparagraph{Operating system}
+            The operating system is Arch Linux a lightweight GNU Linux distribution that is easy to modify for the user needs.
+
+        \subparagraph{Architecture}
+            The architecture chosen is a simple server-client, since the network used to communicate between the Raspberry Pi and the client is self contained and most of the time the server will only have one client connected at a time.
+
+        \subparagraph{Network}
+            Since the necessity of a simple way to connect to the board and transfer any kind of data between the server and the client, I have choose to generate a WiFi hot-spot on the board; this way the connection is wireless and fast and the Ethernet port is free to use. The 3 USB ports remaining can still be used to control directly the board or to plug in other devices.
+
+        \subparagraph{Software}
+            The main difficulty with software is compatibility, so the most effective solution is to virtualize a minified system with only the applications needed for the task. The most effective way to achieve this is using a \docker\  container, specifically built for that single application. This solution allows controlled transparency of both hardware and software, excluding the possibility of dependency collision and incompatibility.\\
+            As base to the container software I have chosen to use a minified version of \blackarch, an Arch Linux based distribution with built in support for a variety of penetration testing software, still maintaining small size and ease of use. \\
+            The main application, which exposes a REST API and allows to execute given commands, scripts and tasks is a \nodejs server. This choice allows a simple development, given the modularity of the framework, and cross-platform compatibility.\\
+            The network is controlled by a hostapd daemon on the main operating system and the network is managed by both a dhcpcd and a dnsmasq services, to allow network NAT.
+
+
+			
+\end{document}
