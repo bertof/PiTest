@@ -15,9 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5sp"
-            android:text="@string/script_result_text" />
+            android:text="@string/script_result_text"
+            android:visibility="visible" />
 
-
+        <ExpandableListView
+            android:id="@+id/expandableOutputList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </RelativeLayout>

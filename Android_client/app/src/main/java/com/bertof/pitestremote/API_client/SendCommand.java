@@ -2,6 +2,8 @@ package com.bertof.pitestremote.API_client;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -17,8 +19,8 @@ import java.net.URI;
 
 public class SendCommand {
 
-    private class SendCommandException extends Exception {
-        public SendCommandException(String message) {
+    public static class SendCommandException extends Exception {
+        SendCommandException(String message) {
             super(message);
         }
     }
@@ -27,10 +29,16 @@ public class SendCommand {
 
     @NonNull
     public static String sendCommandWithRawResponse(String hostname, int port, String token, String command) throws Exception {
-        return sendCommandWithRawResponseCall(hostname, port, token, command).trim();
+        String response = sendCommandWithRawResponseCall(hostname, port, token, command).trim();
+
+        if (response.contains("\"ok\":false") && response.contains("invalid token")) {
+            throw new SendCommandException("Invalid token");
+        }
+
+        return response;
     }
 
-    static String sendCommandWithRawResponseCall(String hostname, int port, String token, String command) throws Exception {
+    private static String sendCommandWithRawResponseCall(String hostname, int port, String token, String command) throws Exception {
 
         HttpClient httpClient = new DefaultHttpClient();
 

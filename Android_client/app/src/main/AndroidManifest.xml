@@ -47,7 +47,10 @@
             android:name=".ExecuteScriptActivity"
             android:permission="android.permission.INTERNET"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ExecuteScriptAirodumpScanActivity"></activity>
+        <activity
+            android:name=".ExecuteScriptAirodumpScanActivity"
+            android:permission="android.permission.INTERNET"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
