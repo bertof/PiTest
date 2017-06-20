@@ -95,36 +95,13 @@ public class ExecuteCommandActivity extends AppCompatActivity {
                 commandTask.cancel(true);
             }
 
+            outputTextView.setText(outputTextView.getText() + "\n" + "Executing: " + command);
+
             commandTask = new AsyncTask<Void, Void, String>() {
 
                 @Override
                 protected String doInBackground(Void... params) {
-                    try {
-                        return SendCommand.sendCommandWithRawResponse(hostname, port, token, command);
-                    } catch (SendCommand.SendCommandException e) {
-                        switch (e.getMessage()) {
-                            case "Invalid token":
-                                Toast.makeText(ExecuteCommandActivity.this, "Wrong token", Toast.LENGTH_SHORT).show();
-                                Intent newActivity = new Intent(ExecuteCommandActivity.this, SetupConnectionActivity.class);
-                                newActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(newActivity);
-
-                                break;
-                            default:
-                                e.printStackTrace();
-                                break;
-                        }
-                    } catch (HttpHostConnectException e) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ExecuteCommandActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return null;
+                    return executeCommandCall(hostname, port, token, command);
                 }
 
                 @Override
@@ -154,5 +131,39 @@ public class ExecuteCommandActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public String executeCommandCall(String hostname, int port, String token, String command) {
+        try {
+            return SendCommand.sendCommandWithRawResponse(hostname, port, token, command);
+        } catch (SendCommand.SendCommandException e) {
+            switch (e.getMessage()) {
+                case "Invalid token":
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ExecuteCommandActivity.this, "Wrong token", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    Intent newActivity = new Intent(ExecuteCommandActivity.this, SetupConnectionActivity.class);
+                    newActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(newActivity);
+
+                    break;
+                default:
+                    e.printStackTrace();
+                    break;
+            }
+        } catch (HttpHostConnectException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ExecuteCommandActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

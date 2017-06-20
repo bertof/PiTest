@@ -71,33 +71,7 @@ public class ExecuteScriptActivity extends AppCompatActivity {
                 scriptTask = new AsyncTask<Void, Void, String>() {
                     @Override
                     protected String doInBackground(Void... params) {
-
-                        try {
-                            return SendScript.sendScriptWithRawResponse(hostname, port, token, script);
-                        } catch (SendScript.SendScriptException e) {
-                            switch (e.getMessage()) {
-                                case "Invalid token":
-                                    Toast.makeText(ExecuteScriptActivity.this, "Wrong token", Toast.LENGTH_SHORT).show();
-                                    Intent newActivity = new Intent(ExecuteScriptActivity.this, SetupConnectionActivity.class);
-                                    newActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(newActivity);
-
-                                    break;
-                                default:
-                                    e.printStackTrace();
-                                    break;
-                            }
-                        } catch (HttpHostConnectException e) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ExecuteScriptActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        return null;
+                        return executeScriptCall(hostname, port, token, script);
                     }
 
                     @Override
@@ -119,5 +93,39 @@ public class ExecuteScriptActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private String executeScriptCall(String hostname, Integer port, String token, String script) {
+        try {
+            return SendScript.sendScriptWithRawResponse(hostname, port, token, script);
+        } catch (SendScript.SendScriptException e) {
+            switch (e.getMessage()) {
+                case "Invalid token":
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ExecuteScriptActivity.this, "Wrong token", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    Intent newActivity = new Intent(ExecuteScriptActivity.this, SetupConnectionActivity.class);
+                    newActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(newActivity);
+
+                    break;
+                default:
+                    e.printStackTrace();
+                    break;
+            }
+        } catch (HttpHostConnectException e) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(ExecuteScriptActivity.this, R.string.connection_failed_error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
