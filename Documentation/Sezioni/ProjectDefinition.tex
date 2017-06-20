@@ -7,7 +7,7 @@
     The project definition will be split in two sections, describing the server and on the client.
 
     \subsection{Server}
-    The server application, from now on \pitest, is installed on the Operating System of the board and needs \nodejs to work.
+    The server application, from now on \pitest, is installed on the Operating System of the board and needs \nodejs\  to work.
 
     \subsubsection{Architecture diagram}
     The following is an high level diagram of the architecture of \pitest.
@@ -44,14 +44,11 @@
     \subparagraph{auth}
     Defines the behaviour of the root \texttt{/auth}, it is used to authenticate the user and requires a valid token.
 
-    \subparagraph{commands}
-    Defines the behaviour of the root \texttt{/commands}, it is used to list to the user the possible commands and all their parameters; it requires authentication using a valid token.
-
     \subparagraph{scripts}
     Defines GTE behaviour of the root \texttt{/scripts}, it is used to list to the user the possible scripts and all their parameters; it requires authentication using a valid token.
 
     \subsubsection{Dependencies}
-    Since the necessity of a solid code base from which extend the application, I have chosen to use some common libraries, both from the standard \nodejs ones and from NPM modules.
+    Since the necessity of a solid code base from which extend the application, I have chosen to use some common libraries, from the standard \nodejs ones and from NPM modules.
 
     \subparagraph{fs}
     It is a \nodejs standard library which allows to read files on the file system.
