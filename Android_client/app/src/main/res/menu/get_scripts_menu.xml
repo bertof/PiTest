@@ -6,8 +6,6 @@
         android:icon="@drawable/ic_refresh_black_24dp"
         android:onClick="updateListOnClick"
         android:title="@string/refresh_action_menu"
+        android:visible="true"
         app:showAsAction="ifRoom" />
-    <item
-        android:onClick="schichia"
-        android:title="Dio caro" />
 </menu>

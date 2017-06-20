@@ -64,7 +64,17 @@ public class GetScriptsActivity extends ListActivity {
         scriptsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent newActivity = new Intent(GetScriptsActivity.this, ExecuteScriptActivity.class);
+
+                Intent newActivity;
+
+                switch (scriptListCodeArray.get(position)) {
+                    case "airodump_scan":
+                        newActivity = new Intent(GetScriptsActivity.this, ExecuteScriptAirodumpScanActivity.class);
+                        break;
+                    default:
+                        newActivity = new Intent(GetScriptsActivity.this, ExecuteScriptActivity.class);
+                        break;
+                }
 
                 String scriptName = scriptListCodeArray.get(position);
                 newActivity.putExtra("script", scriptName);
@@ -72,6 +82,12 @@ public class GetScriptsActivity extends ListActivity {
                 startActivity(newActivity);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateList();
     }
 
     @Override
@@ -99,8 +115,6 @@ public class GetScriptsActivity extends ListActivity {
             }
         }
 
-        updateList();
-
         super.onPostCreate(savedInstanceState);
     }
 
@@ -120,7 +134,7 @@ public class GetScriptsActivity extends ListActivity {
                 scriptListCodeArray.clear();
 
                 for (ListScripts.ListScriptsScripts script : listScriptsScripts) {
-                    scriptListDescriptionArray.add(script.getDescription());
+                    scriptListDescriptionArray.add(script.getScript() + ": " + script.getDescription());
                     scriptListCodeArray.add(script.getScript());
                 }
                 scriptListAdapter.notifyDataSetChanged();
@@ -138,11 +152,5 @@ public class GetScriptsActivity extends ListActivity {
                 return new ListScripts.ListScriptsScripts[]{};
             }
         }.execute();
-    }
-
-    public void schichia(MenuItem item) {
-        scriptListDescriptionArray.add("Ciao");
-        scriptListCodeArray.add("ciao");
-        scriptListAdapter.notifyDataSetChanged();
     }
 }

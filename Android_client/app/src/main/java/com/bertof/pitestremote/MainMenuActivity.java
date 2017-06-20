@@ -36,9 +36,6 @@ public class MainMenuActivity extends AppCompatActivity {
                         case 1:
                             newActivity = new Intent(MainMenuActivity.this, GetScriptsActivity.class);
                             break;
-                        case 2:
-                            newActivity = new Intent(MainMenuActivity.this, GetCommandsActivity.class);
-                            break;
                         default:
                             throw new MainMenuActivityException("Invalid position");
                     }
