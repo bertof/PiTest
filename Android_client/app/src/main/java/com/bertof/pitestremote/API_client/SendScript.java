@@ -18,8 +18,8 @@ import java.net.URI;
 
 public class SendScript {
 
-    private class SendScriptException extends Exception {
-        public SendScriptException(String message) {
+    public static class SendScriptException extends Exception {
+        SendScriptException(String message) {
             super(message);
         }
     }
@@ -28,7 +28,13 @@ public class SendScript {
 
     @NonNull
     public static String sendScriptWithRawResponse(String hostname, int port, String token, String script) throws Exception {
-        return sendScriptWithRawResponseCall(hostname, port, token, script).trim();
+        String response = sendScriptWithRawResponseCall(hostname, port, token, script).trim();
+
+        if (response.contains("\"ok\":false") && response.contains("invalid token")) {
+            throw new SendScript.SendScriptException("Invalid token");
+        }
+
+        return response;
     }
 
     private static String sendScriptWithRawResponseCall(String hostname, int port, String token, String script) throws Exception {
