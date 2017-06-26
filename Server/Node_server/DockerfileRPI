@@ -1,31 +1,25 @@
-FROM cellofellow/rpi-arch
+FROM stephank/archlinux:armv6-devel
 
-ENV USERNAME=user
-ENV OPEN_PORT=4646
+LABEL maintainer "berto.f@protonmail.com"
 
-EXPOSE ${OPEN_PORT}
+USER root
 
-LABEL maintainer "bertof@protonmail.com"
+# Update all system
+RUN pacman -Syyu --noconfirm
 
-# Install nodejs and npm
-RUN pacman -Syu nodejs npm --noconfirm
+# Base packages installation, necessary to control host devices
+RUN pacman -S --noconfirm --needed usbutils pciutils procps-ng
 
-# Install mocha globally
-RUN npm install -g mocha nodemon
+# Installing BlackArch repository
+RUN	cd /tmp/; \
+    	/usr/bin/curl -O https://raw.githubusercontent.com/BlackArch/blackarch-site/master/strap.sh; \
+    	echo ${SHA256SUM}" strap.sh" | sha256sum -c - ; \
+    	/usr/bin/chmod +x ./strap.sh && \
+    	./strap.sh && \
+    	/usr/bin/rm -v /tmp/strap.sh && \
+    	/usr/bin/pacman -Scc --noconfirm
 
-# Add user
-RUN useradd -m -G storage,power,wheel,users ${USERNAME} && \
-chown -R ${USERNAME}:users /home/${USERNAME}
+# Applications wanted by the user
+RUN pacman -S --noconfirm --needed nmap aircrack-ng metasploit rfkill
 
-# Copy app files and set permissions
-ADD . /home/${USERNAME}/PiTest
-RUN chown -R ${USERNAME}:users /home/${USERNAME}/PiTest
-
-# Switch to user in app directory
-USER ${USERNAME}
-WORKDIR /home/${USERNAME}/PiTest
-
-# Install dependencies
-RUN npm install
-
-ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["bash"]
